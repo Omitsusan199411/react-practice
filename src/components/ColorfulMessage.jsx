@@ -1,7 +1,7 @@
 import React from "react";
 
 // App.jsxからpropsを受け取るコンポーネント
-const ColorfulMessage = (props) => {
+export const ColorfulMessage = (props) => {
   // オブジェクトの分割代入
   const { color, children } = props;
   const contentStyle = {
@@ -13,5 +13,3 @@ const ColorfulMessage = (props) => {
     <p style={contentStyle}>{children}</p>
   );
 };
-
-export default ColorfulMessage;

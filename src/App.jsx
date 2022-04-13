@@ -1,13 +1,15 @@
 // 関数コンポーネントでuseState()関数、useEffect()を使用するためにreactの中のuseStateをimportする
 // useStateを使用する場合は無限ループに気をつけること
 import React, { useEffect, useState } from "react";
-import ColorfulMessage from "./components/ColorfulMessage";
+// defalut exportではなく、exportで子コンポーネント呼び出す場合は、{}で子コンポーネントを囲む必要がある。
+import { ColorfulMessage } from "./components/ColorfulMessage";
 
 const App = () => {
   // stateの定義。コンポーネントが持つ可変的（動的な）な状態・データ
   // 配列の分割代入。numはstateの変数名、setNumはstate(num)の状態を動的に変更（更新）するための関数
   // useState(初期値)は関数コンポーネントでstateを管理するための機能。（管理とは保持、更新のこと）
   // const [state, stateを更新する関数] = useState(初期値);で定義する。
+  // stateの変数の値が変更されると、必ず再レンダリングされる
   const [num, setNum] = useState(0);
   // faceShowFragがtrueの時のみ、絵文字を表示させる
   const [faceShowFlag, setFaceShowFrag] = useState(false);
@@ -20,8 +22,8 @@ const App = () => {
     setFaceShowFrag(!faceShowFlag);
   };
 
-  // useEffectである変数の状態が変われば、処理が実行される(関心の分離)
-  // []の中に設定された変数のStateが変われば、useEffect()関数の処理が走る。
+  // useEffect()である変数の状態（[]の中の変数）が変われば、処理が実行される(関心の分離)
+  // []の中に設定された変数のState値が変われば、useEffect()関数の処理が走る。（numの値が変わればuseEffect内の処理が走る）
   useEffect(() => {
     if (num > 0) {
       if (num % 3 === 0) {
